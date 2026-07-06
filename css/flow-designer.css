@@ -1,0 +1,305 @@
+.designer-shell {
+  display: grid;
+  grid-template-columns: minmax(13rem, 16rem) minmax(24rem, 1fr) minmax(
+      17rem,
+      21rem
+    );
+  gap: 1rem;
+  min-height: calc(100vh - 9rem);
+}
+
+.palette-panel,
+.canvas-panel,
+.config-panel {
+  min-height: 100%;
+}
+
+.palette-list {
+  display: grid;
+  gap: 0.65rem;
+}
+
+.palette-node {
+  width: 100%;
+  display: grid;
+  gap: 0.25rem;
+  padding: 0.8rem;
+  border-radius: calc(var(--radius) * 0.65);
+  border: 1px solid currentColor;
+  background: color-mix(in srgb, var(--card) 72%, transparent);
+  color: var(--primary);
+  text-align: left;
+  cursor: grab;
+  transition:
+    transform var(--transition-speed) ease,
+    background var(--transition-speed) ease;
+}
+
+.palette-node:hover,
+.palette-node:focus {
+  transform: translateY(-0.12rem);
+  background: color-mix(in srgb, var(--primary) 10%, var(--card));
+}
+
+.palette-node.transform {
+  color: var(--secondary);
+}
+
+.palette-node.condition {
+  color: var(--warning);
+}
+
+.palette-node.delay {
+  color: var(--muted);
+}
+
+.palette-node.output {
+  color: var(--success);
+}
+
+.palette-node-title {
+  color: var(--text);
+  font-weight: 800;
+}
+
+.palette-node-text {
+  color: var(--muted);
+  font-size: 0.78rem;
+}
+
+.designer-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+}
+
+.toolbar-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  align-items: center;
+}
+
+.canvas-wrap {
+  position: relative;
+  height: calc(100vh - 16rem);
+  min-height: 34rem;
+  overflow: hidden;
+  border-radius: var(--radius);
+  border: var(--border-soft);
+  background:
+    linear-gradient(
+      color-mix(in srgb, var(--muted) 11%, transparent) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      color-mix(in srgb, var(--muted) 11%, transparent) 1px,
+      transparent 1px
+    ),
+    color-mix(in srgb, var(--bg-soft) 78%, transparent);
+  background-size: 1.6rem 1.6rem;
+}
+
+.flow-canvas {
+  position: absolute;
+  inset: 0;
+  transform-origin: center center;
+}
+
+.connection-layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.connection-path {
+  fill: none;
+  stroke: var(--primary);
+  stroke-width: 2.5;
+  pointer-events: stroke;
+  cursor: pointer;
+}
+
+.connection-path.condition-true {
+  stroke: var(--success);
+}
+
+.connection-path.condition-false {
+  stroke: var(--danger);
+}
+
+.connection-path.selected {
+  stroke-width: 4;
+}
+
+.flow-node {
+  position: absolute;
+  width: 13rem;
+  min-height: 6.5rem;
+  padding: 0.8rem;
+  border-radius: var(--radius);
+  border: 1px solid currentColor;
+  background: color-mix(in srgb, var(--card) 95%, transparent);
+  box-shadow: var(--shadow-soft);
+  cursor: move;
+  user-select: none;
+}
+
+.flow-node.selected {
+  box-shadow:
+    0 0 0 0.18rem color-mix(in srgb, var(--primary) 34%, transparent),
+    var(--shadow-soft);
+}
+
+.flow-node.request {
+  color: var(--primary);
+}
+
+.flow-node.transform {
+  color: var(--secondary);
+}
+
+.flow-node.condition {
+  color: var(--warning);
+}
+
+.flow-node.delay {
+  color: var(--muted);
+}
+
+.flow-node.output {
+  color: var(--success);
+}
+
+.node-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.node-title {
+  margin: 0;
+  color: var(--text);
+  font-size: 0.92rem;
+  font-weight: 850;
+}
+
+.node-summary {
+  margin: 0.55rem 0 0;
+  color: var(--muted);
+  font-size: 0.78rem;
+  line-height: 1.35;
+  word-break: break-word;
+}
+
+.node-port {
+  position: absolute;
+  width: 0.85rem;
+  height: 0.85rem;
+  border-radius: 999px;
+  border: 0.15rem solid var(--bg-soft);
+  background: currentColor;
+  cursor: crosshair;
+}
+
+.node-port.input {
+  left: -0.45rem;
+  top: calc(50% - 0.425rem);
+}
+
+.node-port.output {
+  right: -0.45rem;
+  top: calc(50% - 0.425rem);
+}
+
+.node-port.true {
+  right: -0.45rem;
+  top: 2.25rem;
+  background: var(--success);
+}
+
+.node-port.false {
+  right: -0.45rem;
+  bottom: 2.25rem;
+  background: var(--danger);
+}
+
+.port-label {
+  position: absolute;
+  right: 0.75rem;
+  color: var(--muted);
+  font-size: 0.68rem;
+  font-weight: 800;
+}
+
+.port-label.true {
+  top: 1.95rem;
+}
+
+.port-label.false {
+  bottom: 1.95rem;
+}
+
+.config-section {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.key-value-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) auto;
+  gap: 0.45rem;
+  align-items: center;
+}
+
+.counter-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.canvas-hint {
+  position: absolute;
+  right: 1rem;
+  bottom: 1rem;
+  max-width: 18rem;
+  padding: 0.75rem;
+  border-radius: calc(var(--radius) * 0.65);
+  border: var(--border-soft);
+  background: color-mix(in srgb, var(--card) 82%, transparent);
+  color: var(--muted);
+  font-size: 0.78rem;
+}
+
+@media (max-width: 1280px) {
+  .designer-shell {
+    grid-template-columns: minmax(13rem, 16rem) minmax(24rem, 1fr);
+  }
+
+  .config-panel {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 860px) {
+  .designer-shell {
+    grid-template-columns: 1fr;
+  }
+
+  .canvas-wrap {
+    min-height: 30rem;
+    height: 32rem;
+  }
+
+  .key-value-row {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>REST Flow Designer | Settings</title>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="css/settings.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <div data-sidebar></div>
+      <main class="app-main">
+        <section class="page-header">
+          <div>
+            <p class="page-kicker">Settings</p>
+            <h1 class="page-title">Customize the workspace</h1>
+            <p class="page-description">
+              Edit theme tokens, transition timing, canvas defaults, sidebar
+              behavior, and workspace import/export from one place.
+            </p>
+          </div>
+        </section>
+
+        <section class="settings-layout">
+          <div class="content-grid">
+            <div class="panel settings-section">
+              <div>
+                <h2 class="panel-title">Theme Customizer</h2>
+                <p class="panel-text mb-0">
+                  Every visible color is applied live through runtime CSS custom
+                  properties.
+                </p>
+              </div>
+              <div class="theme-token-grid" id="themeCustomizer"></div>
+              <div>
+                <label class="form-label" for="radiusInput"
+                  >Radius <span class="range-value" id="radiusValue"></span
+                ></label>
+                <input
+                  class="form-range"
+                  id="radiusInput"
+                  type="range"
+                  min="4"
+                  max="32"
+                />
+              </div>
+              <div>
+                <label class="form-label" for="fontFamilyInput"
+                  >Font family</label
+                >
+                <select class="form-select" id="fontFamilyInput"></select>
+              </div>
+              <button class="btn btn-outline-light" id="resetThemeBtn">
+                Reset to Default Theme
+              </button>
+            </div>
+
+            <div class="panel settings-section">
+              <div>
+                <h2 class="panel-title">Theme Presets</h2>
+                <p class="panel-text mb-0">
+                  Presets load editable values into the same live token system.
+                </p>
+              </div>
+              <div class="preset-grid" id="presetGrid"></div>
+            </div>
+          </div>
+
+          <div class="content-grid">
+            <div class="theme-preview">
+              <div>
+                <h2 class="panel-title">Live Preview</h2>
+                <p class="panel-text mb-0">
+                  A quick sample of buttons, cards, text, and node chips.
+                </p>
+              </div>
+              <div class="preview-card">
+                <h3 class="card-title">Preview card</h3>
+                <p class="card-text">
+                  Theme changes apply instantly across the whole app.
+                </p>
+                <div class="preview-strip">
+                  <button class="btn btn-primary">Primary</button>
+                  <button class="btn btn-outline-primary">Outline</button>
+                  <span class="node-chip request">Request</span>
+                  <span class="node-chip transform">Transform</span>
+                  <span class="node-chip condition">Condition</span>
+                  <span class="node-chip output">Output</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="panel settings-section">
+              <h2 class="panel-title">Behavior</h2>
+              <div>
+                <label class="form-label" for="transitionSpeedInput"
+                  >Transition speed
+                  <span class="range-value" id="transitionValue"></span
+                ></label>
+                <input
+                  class="form-range"
+                  id="transitionSpeedInput"
+                  type="range"
+                  min="120"
+                  max="900"
+                  step="20"
+                />
+              </div>
+              <div>
+                <label class="form-label" for="defaultZoomInput"
+                  >Default canvas zoom
+                  <span class="range-value" id="zoomValue"></span
+                ></label>
+                <input
+                  class="form-range"
+                  id="defaultZoomInput"
+                  type="range"
+                  min="0.5"
+                  max="1.5"
+                  step="0.05"
+                />
+              </div>
+              <div class="form-check form-switch">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  role="switch"
+                  id="compactSidebarInput"
+                />
+                <label class="form-check-label" for="compactSidebarInput"
+                  >Compact sidebar mode</label
+                >
+              </div>
+            </div>
+
+            <div class="panel settings-section">
+              <h2 class="panel-title">Workspace</h2>
+              <div class="workspace-actions">
+                <button class="btn btn-outline-primary" id="exportWorkspaceBtn">
+                  Export Workspace JSON
+                </button>
+                <button class="btn btn-outline-light" id="resetDemoBtn">
+                  Reset Demo Data
+                </button>
+              </div>
+              <div class="import-box">
+                <label class="form-label" for="importWorkspaceInput"
+                  >Import workspace JSON</label
+                >
+                <input
+                  class="form-control"
+                  type="file"
+                  id="importWorkspaceInput"
+                  accept="application/json"
+                />
+              </div>
+            </div>
+
+            <div class="panel settings-section danger-zone">
+              <h2 class="panel-title">Reset</h2>
+              <p class="panel-text mb-0">
+                This clears local browser storage for REST Flow Designer.
+              </p>
+              <button class="btn btn-danger" id="clearWorkspaceBtn">
+                Clear localStorage entirely
+              </button>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/shared.js"></script>
+    <script src="js/settings.js"></script>
+  </body>
+</html>

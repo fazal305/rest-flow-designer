@@ -1,0 +1,229 @@
+.dashboard-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(18rem, 0.65fr);
+  gap: 1rem;
+  align-items: stretch;
+  margin-bottom: 1rem;
+}
+
+.dashboard-hero .app-card {
+  min-height: 100%;
+}
+
+.hero-flow-strip {
+  position: relative;
+  min-height: 17rem;
+  overflow: hidden;
+  border-radius: var(--radius);
+  border: var(--border-soft);
+  background:
+    linear-gradient(
+      color-mix(in srgb, var(--muted) 11%, transparent) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      color-mix(in srgb, var(--muted) 11%, transparent) 1px,
+      transparent 1px
+    ),
+    color-mix(in srgb, var(--bg-soft) 74%, transparent);
+  background-size: 1.7rem 1.7rem;
+}
+
+.hero-node {
+  position: absolute;
+  width: 8.5rem;
+  padding: 0.75rem;
+  border-radius: calc(var(--radius) * 0.65);
+  border: 1px solid currentColor;
+  background: color-mix(in srgb, var(--card) 92%, transparent);
+  box-shadow: var(--shadow-soft);
+}
+
+.hero-node.request {
+  top: 2.25rem;
+  left: 1.5rem;
+  color: var(--primary);
+}
+
+.hero-node.transform {
+  top: 6.3rem;
+  left: 10.8rem;
+  color: var(--secondary);
+}
+
+.hero-node.output {
+  top: 10.2rem;
+  right: 1.5rem;
+  color: var(--success);
+}
+
+.hero-node-title {
+  color: var(--text);
+  font-weight: 800;
+  font-size: 0.86rem;
+}
+
+.hero-node-subtitle {
+  margin-top: 0.25rem;
+  color: var(--muted);
+  font-size: 0.74rem;
+}
+
+.hero-line {
+  position: absolute;
+  height: 0.15rem;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--primary), var(--secondary));
+  transform-origin: left center;
+}
+
+.hero-line.one {
+  width: 10rem;
+  top: 6rem;
+  left: 8.6rem;
+  transform: rotate(23deg);
+}
+
+.hero-line.two {
+  width: 9.5rem;
+  top: 10rem;
+  left: 18.3rem;
+  transform: rotate(22deg);
+}
+
+.stats-grid {
+  margin-bottom: 1rem;
+}
+
+.quick-action-grid {
+  margin-bottom: 1rem;
+}
+
+.action-card-content {
+  display: grid;
+  align-content: space-between;
+  gap: 0.85rem;
+  width: 100%;
+}
+
+.action-icon {
+  display: grid;
+  place-items: center;
+  width: 2.65rem;
+  height: 2.65rem;
+  border-radius: calc(var(--radius) * 0.65);
+  background: color-mix(in srgb, var(--primary) 14%, transparent);
+  color: var(--primary);
+  font-weight: 850;
+}
+
+.recent-flow-card {
+  display: grid;
+  grid-template-columns: minmax(12rem, 18rem) minmax(0, 1fr);
+  gap: 1rem;
+  align-items: stretch;
+  padding: 1rem;
+  border-radius: var(--radius);
+  border: var(--border-soft);
+  background: color-mix(in srgb, var(--card) 82%, transparent);
+}
+
+.recent-flow-meta {
+  display: grid;
+  gap: 0.55rem;
+}
+
+.recent-flow-title-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.recent-flow-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.activity-list {
+  display: grid;
+  gap: 0.7rem;
+}
+
+.activity-item {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 0.7rem;
+  padding: 0.85rem;
+  border-radius: calc(var(--radius) * 0.65);
+  background: color-mix(in srgb, var(--bg-soft) 68%, transparent);
+  border: 1px solid color-mix(in srgb, var(--muted) 16%, transparent);
+}
+
+.activity-dot {
+  width: 0.72rem;
+  height: 0.72rem;
+  margin-top: 0.35rem;
+  border-radius: 999px;
+  background: var(--primary);
+  box-shadow: 0 0 0 0.35rem color-mix(in srgb, var(--primary) 14%, transparent);
+}
+
+.activity-title {
+  margin: 0;
+  color: var(--text);
+  font-weight: 760;
+}
+
+.activity-detail {
+  margin: 0.18rem 0 0;
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+
+.activity-time {
+  display: block;
+  margin-top: 0.4rem;
+  color: color-mix(in srgb, var(--muted) 78%, transparent);
+  font-size: 0.76rem;
+}
+
+@media (max-width: 1100px) {
+  .dashboard-hero {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 720px) {
+  .recent-flow-card {
+    grid-template-columns: 1fr;
+  }
+
+  .recent-flow-title-row {
+    display: grid;
+  }
+
+  .hero-flow-strip {
+    min-height: 15rem;
+  }
+
+  .hero-node {
+    width: 7rem;
+  }
+
+  .hero-node.transform {
+    left: 8.5rem;
+  }
+
+  .hero-line.one {
+    left: 7.2rem;
+    width: 7.5rem;
+  }
+
+  .hero-line.two {
+    left: 15.3rem;
+    width: 6.5rem;
+  }
+}

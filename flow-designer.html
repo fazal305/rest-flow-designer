@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>REST Flow Designer | Flow Designer</title>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="css/flow-designer.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <div data-sidebar></div>
+      <main class="app-main">
+        <section class="page-header">
+          <div>
+            <p class="page-kicker">Flow Designer</p>
+            <h1 class="page-title">Build a real API workflow</h1>
+            <p class="page-description">
+              Add nodes, wire them together, configure real request and
+              JavaScript behavior, then save the graph into your local
+              workspace.
+            </p>
+          </div>
+          <div class="toolbar-group">
+            <select
+              class="form-select"
+              id="templateSelect"
+              aria-label="Starter templates"
+            ></select>
+            <button class="btn btn-outline-light" id="newFlowBtn">
+              New Flow
+            </button>
+            <button class="btn btn-primary" id="saveFlowBtn">Save Flow</button>
+          </div>
+        </section>
+
+        <section class="designer-shell">
+          <aside class="panel palette-panel">
+            <h2 class="panel-title mb-2">Node Palette</h2>
+            <p class="panel-text small">
+              Click or drag a node type onto the canvas.
+            </p>
+            <div class="palette-list" id="paletteList"></div>
+          </aside>
+
+          <section class="panel canvas-panel">
+            <div class="designer-toolbar">
+              <div class="counter-strip">
+                <span class="badge-token" id="nodeCount">0 nodes</span>
+                <span class="badge-token" id="connectionCount"
+                  >0 connections</span
+                >
+              </div>
+              <div class="toolbar-group">
+                <button class="btn btn-sm btn-outline-light" id="zoomOutBtn">
+                  −
+                </button>
+                <span class="badge-token" id="zoomLabel">100%</span>
+                <button class="btn btn-sm btn-outline-light" id="zoomInBtn">
+                  +
+                </button>
+                <button class="btn btn-sm btn-outline-primary" id="fitBtn">
+                  Fit
+                </button>
+                <button class="btn btn-sm btn-warning" id="resetBtn">
+                  Reset
+                </button>
+              </div>
+            </div>
+
+            <div class="canvas-wrap" id="canvasWrap">
+              <div class="flow-canvas" id="flowCanvas">
+                <svg class="connection-layer" id="connectionLayer"></svg>
+                <div id="nodeLayer"></div>
+              </div>
+              <div class="canvas-hint">
+                Drag nodes to reposition. Drag from an output port to another
+                node input to connect.
+              </div>
+            </div>
+          </section>
+
+          <aside class="panel config-panel">
+            <h2 class="panel-title mb-2">Configuration</h2>
+            <div id="configPanel"></div>
+          </aside>
+        </section>
+      </main>
+    </div>
+
+    <div class="modal fade" id="saveFlowModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog">
+        <form class="modal-content" id="saveFlowForm">
+          <div class="modal-header">
+            <h2 class="modal-title fs-5">Save Flow</h2>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body d-grid gap-3">
+            <div>
+              <label class="form-label" for="flowName">Name</label>
+              <input class="form-control" id="flowName" required />
+            </div>
+            <div>
+              <label class="form-label" for="flowDescription"
+                >Description</label
+              >
+              <textarea
+                class="form-control"
+                id="flowDescription"
+                rows="3"
+              ></textarea>
+            </div>
+            <div>
+              <label class="form-label" for="flowTags">Tags</label>
+              <input
+                class="form-control"
+                id="flowTags"
+                placeholder="demo, users, transform"
+              />
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button
+              class="btn btn-outline-light"
+              type="button"
+              data-bs-dismiss="modal"
+            >
+              Cancel
+            </button>
+            <button class="btn btn-primary" type="submit">Save Flow</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/shared.js"></script>
+    <script src="js/flow-designer.js"></script>
+  </body>
+</html>

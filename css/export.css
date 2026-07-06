@@ -1,0 +1,79 @@
+.export-layout {
+  display: grid;
+  grid-template-columns: minmax(18rem, 0.75fr) minmax(24rem, 1.25fr);
+  gap: 1rem;
+  align-items: start;
+}
+
+.export-options {
+  display: grid;
+  gap: 0.9rem;
+}
+
+.export-type-grid {
+  display: grid;
+  gap: 0.65rem;
+}
+
+.export-type-card {
+  position: relative;
+  display: grid;
+  gap: 0.25rem;
+  padding: 0.85rem;
+  border-radius: calc(var(--radius) * 0.65);
+  border: 1px solid color-mix(in srgb, var(--muted) 22%, transparent);
+  background: color-mix(in srgb, var(--bg-soft) 70%, transparent);
+  cursor: pointer;
+}
+
+.export-type-card input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.export-type-card.active {
+  border-color: var(--primary);
+  background: color-mix(in srgb, var(--primary) 13%, var(--bg-soft));
+}
+
+.export-type-title {
+  color: var(--text);
+  font-weight: 800;
+}
+
+.export-type-copy {
+  color: var(--muted);
+  font-size: 0.86rem;
+}
+
+.export-code-panel {
+  min-height: 36rem;
+}
+
+.export-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  justify-content: flex-end;
+  margin-top: 0.75rem;
+}
+
+.export-summary {
+  display: grid;
+  gap: 0.5rem;
+  padding: 0.85rem;
+  border-radius: calc(var(--radius) * 0.65);
+  background: color-mix(in srgb, var(--bg-soft) 70%, transparent);
+  border: 1px solid color-mix(in srgb, var(--muted) 16%, transparent);
+}
+
+@media (max-width: 980px) {
+  .export-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .export-code-panel {
+    min-height: 28rem;
+  }
+}

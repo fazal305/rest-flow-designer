@@ -1,0 +1,132 @@
+.runner-layout {
+  display: grid;
+  grid-template-columns: minmax(22rem, 0.9fr) minmax(24rem, 1.1fr);
+  gap: 1rem;
+  align-items: start;
+}
+
+.runner-controls {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.runner-preview {
+  min-height: 18rem;
+}
+
+.execution-log {
+  display: grid;
+  gap: 0.75rem;
+  max-height: 36rem;
+  overflow: auto;
+  padding-right: 0.35rem;
+}
+
+.execution-step {
+  display: grid;
+  gap: 0.55rem;
+  padding: 0.85rem;
+  border-radius: calc(var(--radius) * 0.65);
+  border: 1px solid color-mix(in srgb, var(--muted) 18%, transparent);
+  background: color-mix(in srgb, var(--bg-soft) 68%, transparent);
+}
+
+.execution-step.success {
+  border-color: color-mix(in srgb, var(--success) 42%, transparent);
+}
+
+.execution-step.error {
+  border-color: color-mix(in srgb, var(--danger) 48%, transparent);
+}
+
+.execution-step.active {
+  box-shadow: 0 0 0 0.18rem color-mix(in srgb, var(--primary) 24%, transparent);
+}
+
+.execution-step-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+  align-items: flex-start;
+}
+
+.execution-step-title {
+  margin: 0;
+  color: var(--text);
+  font-weight: 800;
+}
+
+.execution-preview-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.65rem;
+}
+
+.preview-block {
+  min-width: 0;
+}
+
+.preview-label {
+  margin: 0 0 0.25rem;
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.preview-code {
+  max-height: 10rem;
+  overflow: auto;
+  margin: 0;
+  padding: 0.65rem;
+  border-radius: calc(var(--radius) * 0.55);
+  background: color-mix(in srgb, var(--bg) 82%, var(--bg-soft));
+  color: var(--text);
+  font-family: var(--code-font);
+  font-size: 0.76rem;
+  white-space: pre-wrap;
+}
+
+.final-output {
+  min-height: 12rem;
+}
+
+.history-list {
+  display: grid;
+  gap: 0.65rem;
+  max-height: 26rem;
+  overflow: auto;
+}
+
+.history-item {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  border-radius: calc(var(--radius) * 0.6);
+  background: color-mix(in srgb, var(--bg-soft) 68%, transparent);
+  border: 1px solid color-mix(in srgb, var(--muted) 16%, transparent);
+}
+
+.runner-mini-node.is-executing {
+  outline: 0.2rem solid var(--primary);
+  outline-offset: 0.18rem;
+}
+
+@media (max-width: 1040px) {
+  .runner-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 680px) {
+  .execution-preview-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .execution-step-header,
+  .history-item {
+    display: grid;
+  }
+}
