@@ -452,7 +452,32 @@ function previewData(data) {
     }
 }
 
-async function executeRequestNode(node, input) {
+const REQUEST_TIMEOUT_MS = 18000;
+const SLOW_REQUEST_WARNING_MS = 5000;
+
+async function fetchWithTimeout(url, options = {}, timeoutMs = REQUEST_TIMEOUT_MS, onSlowRequest) {
+    const controller = new AbortController();
+    const timeoutId = window.setTimeout(() => controller.abort(), timeoutMs);
+    const slowTimerId = typeof onSlowRequest === "function"
+        ? window.setTimeout(() => onSlowRequest(), Math.min(SLOW_REQUEST_WARNING_MS, timeoutMs - 1))
+        : null;
+
+    try {
+        return await fetch(url, { ...options, signal: controller.signal });
+    } catch (error) {
+        if (error.name === "AbortError") {
+            const timeoutError = new Error("Request timed out — the endpoint may be slow or unreachable");
+            timeoutError.isTimeout = true;
+            throw timeoutError;
+        }
+        throw error;
+    } finally {
+        window.clearTimeout(timeoutId);
+        if (slowTimerId !== null) window.clearTimeout(slowTimerId);
+    }
+}
+
+async function executeRequestNode(node, input, options = {}) {
     const config = node.config || {};
     const headers = {};
     (config.headers || []).forEach((header) => {
@@ -471,7 +496,12 @@ async function executeRequestNode(node, input) {
         }
     }
 
-    const response = await fetch(config.url, requestOptions);
+    const response = await fetchWithTimeout(
+        config.url,
+        requestOptions,
+        REQUEST_TIMEOUT_MS,
+        options.onSlowRequest ? () => options.onSlowRequest(node) : null
+    );
     const contentType = response.headers.get("content-type") || "";
     const body = contentType.includes("application/json") ? await response.json() : await response.text();
 
@@ -503,7 +533,7 @@ async function executeFlow(flow, options = {}) {
             if (options.onNodeStart) await options.onNodeStart(node, input, steps);
 
             if (node.type === "request") {
-                output = await executeRequestNode(node, input);
+                output = await executeRequestNode(node, input, { onSlowRequest: options.onSlowRequest });
             }
 
             if (node.type === "transform") {
@@ -640,7 +670,19 @@ async function runFlow(initialInput = null) {
         }
       }
 
-      const response = await fetch(node.config.url, options);
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 18000);
+      let response;
+      try {
+        response = await fetch(node.config.url, { ...options, signal: controller.signal });
+      } catch (fetchError) {
+        if (fetchError.name === "AbortError") {
+          throw new Error("Request timed out — the endpoint may be slow or unreachable");
+        }
+        throw fetchError;
+      } finally {
+        clearTimeout(timeoutId);
+      }
       const contentType = response.headers.get("content-type") || "";
       const body = contentType.includes("application/json") ? await response.json() : await response.text();
 

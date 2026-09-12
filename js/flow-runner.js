@@ -135,6 +135,10 @@ async function runFlow(flow) {
             },
             onNodeComplete: async (node, output, step, steps) => {
                 renderExecutionLog(steps);
+            },
+            onSlowRequest: (node) => {
+                $("#runStatus").text("Still running");
+                RestFlow.showStatus(`Still waiting on "${node.name || node.type}" — this request is taking longer than usual.`, "warning");
             }
         });
 
